@@ -12,14 +12,21 @@ This project allows you to use [BlueSCSI](https://github.com/erichelgeson/BlueSC
 
 Under development.
 
-## [version 1.0](v1.0/gerber) (March 2021) - provided for history only, DO NOT USE
+## [version 1.0](v1.0/gerber) (March 2021) - not recommended, modify before using
 
 First version. 50-pin-SCSI, termination and SD card worked first time, right out of the gate. However, problems:
 
-* The screw holes are slightly off
+* The screw holes are slightly too far in from edges
 * `RETURN` lines are not connected to signal ground
 * Can only power STM32 from `MOTOR +5` *or* USB, no option to power it from from `TERMPWR`
 * No option to disconnect STM32 from J1 power and use USB power alone
+
+If you choose to use this board design, please do the following:
+* break the `MOTOR +5` trace, as seen in [this image](images/j2.jpg)
+* Solder a wire from any ground pin to one of the `RETURN` pins (number 3, 4, 37 or 38) of `J1`. These are 1 column in from each edge, and and connected together. They are next to the `MOTOR +5` pins, the trace you broke above.
+* Ensure J9 ("bridge +5v and term power") is always shorted/jumped
+
+Why the modifications? the `MOTOR +5` pins do not appear to be working the way I expect. The power was being disconnected at unexpected times and I could not see a pattern. Maybe it is a power-saving feature? Until I figure it out and update the board design, I recommend you power the device from `TERMPWR` as usual.
 
 # Board
 
