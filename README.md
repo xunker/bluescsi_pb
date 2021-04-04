@@ -6,11 +6,20 @@ This project allows you to use [BlueSCSI](https://github.com/erichelgeson/BlueSC
 
 ![Picture of bluescsi_pb connected to PowerBook 520c](images/headline.jpg)
 
-# Gerber Files
+# Board Versions and Gerber Files
 
-[version 1.1](v1.1/gerber) - current
+## version 1.1(v1.1/gerber) (April 2021) - current
 
-[version 1.0](v1.0/gerber) - provided for history only, DO NOT USE
+Under development.
+
+## [version 1.0](v1.0/gerber) (March 2021) - provided for history only, DO NOT USE
+
+First version. 50-pin-SCSI, termination and SD card worked first time, right out of the gate. However, problems:
+
+* The screw holes are slightly off
+* `RETURN` lines are not connected to signal ground
+* Can only power STM32 from `MOTOR +5` *or* USB, no option to power it from from `TERMPWR`
+* No option to disconnect STM32 from J1 power and use USB power alone
 
 # Board
 
