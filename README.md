@@ -8,29 +8,50 @@ This project allows you to use [BlueSCSI](https://github.com/erichelgeson/BlueSC
 
 # Board Versions and Gerber Files
 
-## version 1.1(v1.1/gerber) (April 2021) - current
+## [version 1.1](v1.1/) (April 2021) - current
 
-Under development.
+v1.1 sent to fab today (Monday, Apr 5), hope to have to have it back by the weekend for testing.
 
-## [version 1.0](v1.0/gerber) (March 2021) - not recommended, modify before using
+Changes:
+
+* Connect `RETURN` on 40-pin SCSI connector with signal ground
+* STM32 +5 is connected to `TERMPWR` by default, via breakable jumper pad
+* Separate jumpers provided for powering via `TERMPWR` or `MOTORPWR`
+  - *MOTORPWR* is a separate +5v provided to run the drive motor and actuator
+  - This change will be helpful for debugging power issues where *MOTORPWR* appears to be inconsistent
+* Mounting hole locations adjusted so they match an actual drive
+* Activity LED (`LED_BUILTIN`) broken-out if you want to have an external LED
+  - You can use the cathode (negative) pin of the LED footprint to monitor drive activity from an external device directly
+* Traces and resistor packs are moved farther away from mounting holes to avoid potential shorts
+* Increased `TERMPWR` trace width
+* Back silkscreen marks location of the key pin (17) within the 40-pin connector
+* Moved legends for J1, J2 and J8 so they are next to pin 1 on their respective connectors
+* Corners rounded more
+* Shorten board by about 5mm
+  - This is the shortest practical length to maintain all four screw holes
+* Numerous changes to the routing of traces
+
+![3D rendering of bluescsi_pb v1.1 board ](images/pcb_v1.1_render.jpg)
+
+## [version 1.0](v1.0/) (March 2021) - not recommended, modify before using
 
 First version. 50-pin-SCSI, termination and SD card worked first time, right out of the gate. However, problems:
 
 * The screw holes are slightly too far in from edges
 * `RETURN` lines are not connected to signal ground
-* Can only power STM32 from `MOTOR +5` *or* USB, no option to power it from from `TERMPWR`
-* No option to disconnect STM32 from J1 power and use USB power alone
+* Can only power STM32 from `MOTORPWR` *or* USB, no option to power it from from `TERMPWR` alone
+* No option to disconnect STM32 from *both* `TERMPWR` and `MOTORPWR` power and use USB power alone without backfeeding
 
 If you choose to use this board design, please do the following:
-* break the `MOTOR +5` trace, as seen in [this image](images/j2.jpg)
-* Solder a wire from any ground pin to one of the `RETURN` pins (number 3, 4, 37 or 38) of `J1`. These are 1 column in from each edge, and and connected together. They are next to the `MOTOR +5` pins, the trace you broke above.
+* break the `MOTORPWR` trace, as seen in [this image](images/j2.jpg)
+* Solder a wire from any ground pin to one of the `RETURN` pins (number 3, 4, 37 or 38) of `J1`. These are 1 column in from each edge, and and connected together. They are next to the `MOTORPWR` pins, the trace you broke above.
 * Ensure J9 ("bridge +5v and term power") is always shorted/jumped
 
-Why the modifications? the `MOTOR +5` pins do not appear to be working the way I expect. The power was being disconnected at unexpected times and I could not see a pattern. Maybe it is a power-saving feature? Until I figure it out and update the board design, I recommend you power the device from `TERMPWR` as usual.
-
-# Board
+Why the modifications? the `MOTORPWR` pins do not appear to be working the way I expect. The power was being disconnected at unexpected times and I could not see a pattern. Maybe it is a power-saving feature? Until I figure it out and update the board design, I recommend you power the device from `TERMPWR` as usual.
 
 ![3D rendering of bluescsi_pb v1.0 board ](images/pcb_v1.0_render.jpg)
+
+# Board Tour
 
 ## 40-pin connector (J1)
 
