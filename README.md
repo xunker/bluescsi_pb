@@ -16,7 +16,7 @@
   * [MicroSD card (J3) and SD Card Breakout (J7)](#microsd-card--j3--and-sd-card-breakout--j7-)
   * [Power selection jumpers (v1.1+ only)](#power-selection-jumpers--v11--only-)
     + [Powering board by motor power (`MOTORPWR`)](#powering-board-by-motor-power---motorpwr--)
-    + [(Re)powering board by termination power (`MOTORPWR`)](#-re-powering-board-by-termination-power---motorpwr--)
+    + [(Re)powering board by termination power (`TERMWR`)](#-re-powering-board-by-termination-power---termpwr--)
     + [Powering board by USB alone](#powering-board-by-usb-alone)
   * [Activity LED (D1) (v1.1+ only)](#activity-led--d1---v11--only-)
 - [Caveats](#caveats)
@@ -164,7 +164,7 @@ If you want to have the board be powered by +5 motor power (`MOTORPWR`) instead 
 
 This will power the Blue Pill module from `MOTORPWR`, but *SCSI termination* will still be powered by `TERMPWR`.
 
-### (Re)powering board by termination power (`MOTORPWR`)
+### (Re)powering board by termination power (`TERMPWR`)
 
 If JP1 is broken and you want reconnect the board back to `TERMPWR`, you must either:
 * Solder a 2-pin header to **J9** and short it with a removable jumper cap
