@@ -1,5 +1,36 @@
 # PowerBook adapter for BlueSCSI
 
+- [About](#about)
+- [Compatibility](#compatibility)
+- [Board Versions and Gerber Files](#board-versions-and-gerber-files)
+  * [version 1.1 (April 2021)](#-version-11--v11----april-2021----current)
+  * [version 1.0 (March 2021)](#-version-10--v10----march-2021----not-recommended--modify-before-using)
+- [Future Plans](#future-plans)
+  * [v1.2 (possible maintenance version)](#v12--possible-maintenance-version-)
+  * [v2.0 (possible full redesign)](#v20--possible-full-redesign-)
+- [Board Tour](#board-tour)
+  * [40-pin connector (J1)](#40-pin-connector--j1-)
+  * [8-pin connector (J2)](#8-pin-connector--j2-)
+  * [50-pin connector (J8)](#50-pin-connector--j8-)
+  * [Termination Resistors Packs and Termination Enable Jumpers (J4, J5)](#termination-resistors-packs-and-termination-enable-jumpers--j4--j5-)
+  * [MicroSD card (J3) and SD Card Breakout (J7)](#microsd-card--j3--and-sd-card-breakout--j7-)
+  * [Power selection jumpers (v1.1+ only)](#power-selection-jumpers--v11--only-)
+    + [Powering board by motor power (`MOTORPWR`)](#powering-board-by-motor-power---motorpwr--)
+    + [(Re)powering board by termination power (`MOTORPWR`)](#-re-powering-board-by-termination-power---motorpwr--)
+    + [Powering board by USB alone](#powering-board-by-usb-alone)
+  * [Activity LED (D1) (v1.1+ only)](#activity-led--d1---v11--only-)
+- [Caveats](#caveats)
+  * [Termination](#termination)
+  * [40-pin ribbon should not be seated fully on connector J1 (for me, at least)](#40-pin-ribbon-should-not-be-seated-fully-on-connector-j1--for-me--at-least-)
+  * [Clearance](#clearance)
+  * [Using the 50-pin connector at the same time as the 40-pin connector](#using-the-50-pin-connector-at-the-same-time-as-the-40-pin-connector)
+- [Credits](#credits)
+- [License](#license)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+# About
+
 https://github.com/xunker/bluescsi_pb
 
 This project allows you to use [BlueSCSI](https://github.com/erichelgeson/BlueSCSI) (STM32 SCSI emulator) in the Apple PowerBook, or in any other device that uses 40-pin 2.5in mobile SCSI devices.
