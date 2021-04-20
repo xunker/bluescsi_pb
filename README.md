@@ -1,33 +1,37 @@
+<!-- TOC ignore:true -->
 # PowerBook adapter for BlueSCSI
 
+<!-- TOC -->
+
+- [PowerBook adapter for BlueSCSI](#powerbook-adapter-for-bluescsi)
 - [About](#about)
 - [Compatibility](#compatibility)
 - [Board Versions and Gerber Files](#board-versions-and-gerber-files)
-  * [version 1.1 (April 2021)](#-version-11--v11----april-2021----current)
-  * [version 1.0 (March 2021)](#-version-10--v10----march-2021----not-recommended--modify-before-using)
+  - [version 1.1 April 2021 - current](#version-11-april-2021---current)
+  - [version 1.0 March 2021 - not recommended, modify before using](#version-10-march-2021---not-recommended-modify-before-using)
 - [Future Plans](#future-plans)
-  * [v1.2 (possible maintenance version)](#v12--possible-maintenance-version-)
-  * [v2.0 (possible full redesign)](#v20--possible-full-redesign-)
+  - [v1.2 possible maintenance version](#v12-possible-maintenance-version)
+  - [v2.0 possible full redesign](#v20-possible-full-redesign)
 - [Board Tour](#board-tour)
-  * [40-pin connector (J1)](#40-pin-connector--j1-)
-  * [8-pin connector (J2)](#8-pin-connector--j2-)
-  * [50-pin connector (J8)](#50-pin-connector--j8-)
-  * [Termination Resistors Packs and Termination Enable Jumpers (J4, J5)](#termination-resistors-packs-and-termination-enable-jumpers--j4--j5-)
-  * [MicroSD card (J3) and SD Card Breakout (J7)](#microsd-card--j3--and-sd-card-breakout--j7-)
-  * [Power selection jumpers (v1.1+ only)](#power-selection-jumpers--v11--only-)
-    + [Powering board by motor power (`MOTORPWR`)](#powering-board-by-motor-power---motorpwr--)
-    + [(Re)powering board by termination power (`TERMWR`)](#-re-powering-board-by-termination-power---termpwr--)
-    + [Powering board by USB alone](#powering-board-by-usb-alone)
-  * [Activity LED (D1) (v1.1+ only)](#activity-led--d1---v11--only-)
+  - [J1 40-pin mobile SCSI connector](#j1-40-pin-mobile-scsi-connector)
+  - [J2 8-pin connector](#j2-8-pin-connector)
+  - [J8 50-pin desktop SCSI connector](#j8-50-pin-desktop-scsi-connector)
+  - [Termination Resistors Packs and Termination Enable Jumpers J4, J5](#termination-resistors-packs-and-termination-enable-jumpers-j4-j5)
+  - [MicroSD card J3 and SD Card Breakout J7](#microsd-card-j3-and-sd-card-breakout-j7)
+  - [Power selection jumpers v1.1+ only](#power-selection-jumpers-v11-only)
+    - [Powering board by motor power MOTORPWR](#powering-board-by-motor-power-motorpwr)
+    - [Repowering board by termination power TERMPWR](#repowering-board-by-termination-power-termpwr)
+    - [Powering board by USB alone](#powering-board-by-usb-alone)
+  - [Activity LED D1 v1.1+ only](#activity-led-d1-v11-only)
 - [Caveats](#caveats)
-  * [Termination](#termination)
-  * [40-pin ribbon should not be seated fully on connector J1 (for me, at least)](#40-pin-ribbon-should-not-be-seated-fully-on-connector-j1--for-me--at-least-)
-  * [Clearance](#clearance)
-  * [Using the 50-pin connector at the same time as the 40-pin connector](#using-the-50-pin-connector-at-the-same-time-as-the-40-pin-connector)
+  - [Termination](#termination)
+  - [Ribbon cable should not be seated fully on connector J1 for me, at least](#ribbon-cable-should-not-be-seated-fully-on-connector-j1-for-me-at-least)
+  - [Clearance](#clearance)
+  - [Using the 50-pin connector at the same time as the 40-pin connector](#using-the-50-pin-connector-at-the-same-time-as-the-40-pin-connector)
 - [Credits](#credits)
 - [License](#license)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+<!-- /TOC -->
 
 # About
 
@@ -118,11 +122,11 @@ If I want to fork the actual BlueSCSI firmware, I would like to add:
 
 # Board Tour
 
-## 40-pin connector (J1)
+## J1 (40-pin mobile SCSI connector)
 
 This is a 2.0mm, two-row, right angle header connector. It connects to the ribbon cable inside the PowerBook. Most ribbon cables have a "key pin" located at pin 17. If this is the case, you will need to break that pin off the connector on your board. The side the key is located on is indicated by the "[" symbol.
 
-## 8-pin connector (J2)
+## J2 (8-pin connector)
 
 This is also a 2.0mm, two-row, right angle header connector, located to the right of the 40-pin connector. This connector is **not required* for operation, you do not have to solder headers to it if you don't want to.
 
@@ -132,7 +136,7 @@ In some systems, it is used to change the SCSI ID of the drive, trigger spin-up 
 
 ![Picture of unpopulates J2 connector](images/j2.jpg)
 
-## 50-pin connector (J8)
+## J8 (50-pin desktop SCSI connector)
 
 This is provided to connect to a desktop SCSI connection. If you only intend to use this inside a PowerBook then this is not required.
 
@@ -197,7 +201,7 @@ Although documentation for the [IBM DHAS-2270](https://stason.org/TULARC/pc/hard
 
 .. I have found that this adapter does not want to work as the internal drive unless you enable termination. The PB 520c *does* supply termination power to the internal drive (although it *does not* supply it to the external HDI-30 SCSI connector).
 
-## 40-pin ribbon should not be seated fully on connector J1 (for me, at least)
+## Ribbon cable should not be seated fully on connector J1 (for me, at least)
 
 On my PowerBook 520c, seating the drive cable fully on to connector J1 causes the BlueSCSI module to not work. I have found that leaving the ribbon cable *slightly* (like, 1mm maybe) off the connector makes the connection much more reliable. See picture below so see how much I am talking about:
 
