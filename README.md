@@ -23,6 +23,9 @@
     - [Repowering board by termination power TERMPWR](#repowering-board-by-termination-power-termpwr)
     - [Powering board by USB alone](#powering-board-by-usb-alone)
   - [Activity LED D1 v1.1+ only](#activity-led-d1-v11-only)
+- [Bill of Materials](#bill-of-materials)
+  - [Required](#required)
+  - [Optional](#optional)
 - [Caveats](#caveats)
   - [Termination](#termination)
   - [Ribbon cable should not be seated fully on connector J1 for me, at least](#ribbon-cable-should-not-be-seated-fully-on-connector-j1-for-me-at-least)
@@ -190,6 +193,33 @@ If you want to power the Blue Pill module from USB power, you must:
 This is a breakout of the built-in LED that reflects disk activity. It is the same as the LED on the Blue Pill module itself. This part is **optional** and the module will work without it.
 
 The signal is active-low, and current-limiting resistor for the LED is on the *positive* (anode) side of the LED. This way you can tap in to the cathode (negative) pin of the LED footprint to monitor drive activity from an external device directly if you need to do that.
+
+# Bill of Materials
+
+To assemble the board, you will need the following components.
+
+## Required
+
+Quantity | Thing | Example Part Number
+---------|-------|--------------------
+1        | An STM32 "Blue Pill" module and a way to program it with the [BlueSCSI](https://github.com/erichelgeson/BlueSCSI) firmware |
+2        | 330 Ohm Resistor Network in SIP-10 package | Bourns 4610X-101-331
+2        | 220 Ohm Resistor Network in SIP-10 package | Bourns 4610X-101-221
+1        | MicroSD Card connector (or use SD-to-MicroSD adapter [as shown here](#microsd-card-j3-and-sd-card-breakout-j7)) |  Molex 104031-0811
+1        | 2x20 right-angle **2mm** header for connector J1 |
+2        | 1x2 header pins for the termination jumper connectors J4 and J5 |
+2        | Jumpers (aka jumper caps, shunts, or shorts) for J4 and J5 |
+
+## Optional
+
+Quantity | Thing
+---------|-------
+1        | 1x4 2.54mm right-angle header for debugging connector
+2        | 1x2 header pins for the power selection jumper connectors J9 and J10
+1        | 2x25 2.54 header pins for 50-pin desktop SCSI connector J8
+1        | LED for D1
+1        | Resistor (R1) for LED, any value from 330 ohms to about 1.8k ohms will work
+2        | ["low-profile" female headers](https://www.adafruit.com/product/3008) if you do not want to permanently solder the Blue Pill board
 
 # Caveats
 
