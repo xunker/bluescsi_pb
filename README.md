@@ -7,25 +7,19 @@
 - [About](#about)
 - [Compatibility](#compatibility)
 - [Board Versions and Gerber Files](#board-versions-and-gerber-files)
-  - [version 1.1 April 2021 - current](#version-11-april-2021---current)
-  - [version 1.0 March 2021 - not recommended, modify before using](#version-10-march-2021---not-recommended-modify-before-using)
-- [Future Plans](#future-plans)
-  - [v1.2 possible maintenance version](#v12-possible-maintenance-version)
-  - [v2.0 possible full redesign](#v20-possible-full-redesign)
+  - [Future versions of the board](#future-versions-of-the-board)
 - [Board Tour](#board-tour)
   - [J1 40-pin mobile SCSI connector](#j1-40-pin-mobile-scsi-connector)
   - [J2 8-pin connector](#j2-8-pin-connector)
   - [J8 50-pin desktop SCSI connector](#j8-50-pin-desktop-scsi-connector)
   - [Termination Resistors Packs and Termination Enable Jumpers J4, J5](#termination-resistors-packs-and-termination-enable-jumpers-j4-j5)
   - [MicroSD card J3 and SD Card Breakout J7](#microsd-card-j3-and-sd-card-breakout-j7)
-  - [Power selection jumpers v1.1+ only](#power-selection-jumpers-v11-only)
+  - [Power selection jumpers](#power-selection-jumpers)
     - [Powering board by motor power MOTORPWR](#powering-board-by-motor-power-motorpwr)
     - [Repowering board by termination power TERMPWR](#repowering-board-by-termination-power-termpwr)
     - [Powering board by USB alone](#powering-board-by-usb-alone)
-  - [Activity LED D1 v1.1+ only](#activity-led-d1-v11-only)
+  - [Activity LED D1](#activity-led-d1)
 - [Bill of Materials](#bill-of-materials)
-  - [Required](#required)
-  - [Optional](#optional)
 - [Caveats](#caveats)
   - [Termination](#termination)
   - [Ribbon cable should not be seated fully on connector J1 for me, at least](#ribbon-cable-should-not-be-seated-fully-on-connector-j1-for-me-at-least)
@@ -52,78 +46,16 @@ Using the 50-pin connector, I have successfully used it with an Apple IIgs, a Ma
 
 # Board Versions and Gerber Files
 
-## [version 1.1](v1.1/) (April 2021) - current
-
-Changes in order of importance:
-* Mounting hole locations adjusted so they match an actual drive
-* Connect `RETURN` on 40-pin SCSI connector with signal ground
-* STM32 +5 is connected to `TERMPWR` by default, via breakable jumper pad
-* Separate jumpers provided for powering via `TERMPWR` or `MOTORPWR`
-  - *MOTORPWR* is a separate +5v provided to run the drive motor and actuator
-  - This change will be helpful for debugging power issues where *MOTORPWR* appears to be inconsistent
-* Activity LED (`LED_BUILTIN`) broken-out if you want to have an external LED
-* Increased `TERMPWR` trace width
-* Traces and resistor packs are moved farther away from mounting holes to avoid potential shorts
-* Back silkscreen marks location of the key pin (17) within the 40-pin connector
-* Moved legends for J1, J2 and J8 so they are next to pin 1 on their respective connectors
-* Corners rounded more
-* Shorten board by about 5mm
-  - This is the shortest practical length to maintain all four screw holes
-* Numerous changes to the routing of traces
+* [version 1.1](v1.1/) (April 2021) - current
+* [version 1.0](v1.0/) (March 2021) - deprecated, not recommended
 
 ![3D rendering of bluescsi_pb v1.1 board ](images/pcb_v1.1_render.jpg)
 
-## [version 1.0](v1.0/) (March 2021) - not recommended, modify before using
+## Future versions of the board
 
-First version. 50-pin-SCSI, termination and SD card worked first time, right out of the gate. However, problems:
+See [FUTURE_PLANS.md](FUTURE_PLANS.md).
 
-* The screw holes are slightly too far in from edges
-* `RETURN` lines are not connected to signal ground
-* Can only power STM32 from `MOTORPWR` *or* USB, no option to power it from from `TERMPWR` alone
-* No option to disconnect STM32 from *both* `TERMPWR` and `MOTORPWR` power and use USB power alone without backfeeding
-
-If you choose to use this board design, please do the following:
-* break the `MOTORPWR` trace, as seen in [this image](images/j2.jpg)
-* Solder a wire from any ground pin to one of the `RETURN` pins (number 3, 4, 37 or 38) of `J1`. These are 1 column in from each edge, and and connected together. They are next to the `MOTORPWR` pins, the trace you broke above.
-* Ensure J9 ("bridge +5v and term power") is always shorted/jumped
-
-Why the modifications? the `MOTORPWR` pins do not appear to be working the way I expect. The power was being disconnected at unexpected times and I could not see a pattern. Maybe it is a power-saving feature? Until I figure it out and update the board design, I recommend you power the device from `TERMPWR` as usual.
-
-![3D rendering of bluescsi_pb v1.0 board ](images/pcb_v1.0_render.jpg)
-
-# Future Plans
-
-v1.1 is working well so I don't expect any majour changes for a while.
-## v1.2 (possible maintenance version)
-
-Plans for a v1.2 (maintenance) may include:
-
-* Jumper to toggle the activity LED
-  - So you can solder the LED and resistor, but disable it later if you prefer
-* Break out power LED
-  - Provide a power LED (and a jumper toggle) breakout if an external power LED is desired
-* Replace J4 & J5 with DIP switches or a single DPDT switch
-
-## v2.0 (possible full redesign)
-
-If I continue to develop project in the future, I plan on a full redesign.
-
-* Use termination ICs instead of resistors
-  - Lower power consumption
-  - More accurate termination voltage
-  - Switchable termination resistance (110-ohm or 2.5k-ohm) for short busses
-* Attach J1 & J2 via the PCB edge to make it more like how an actual hard drive connects
-* Less-expensive Micro SD card slot
-* Automatic switching between TERMPWR, MOTORPWR or USB Power
-
-If I want to fork the actual BlueSCSI firmware, I would like to add:
-
-* Separate LEDs for read and write activity
-* Read TERMPWR and MOTORPWR voltages and report them on the debugging connector
-* LEDs to indicate with SCSI ID is being accessed
-* Support OLED debugging display
-
-# Board Tour
+# Tour of board v1.1
 
 ## J1 (40-pin mobile SCSI connector)
 
@@ -159,7 +91,7 @@ If you do not have the correct part (or don't like soldering SMD, which is total
 
 ![Picture of MicroSD connector pad and SD-to-MicroSD adapter with header pins soldered to it](images/low_rent_microsd_adapter.jpg)
 
-## Power selection jumpers (v1.1+ only)
+## Power selection jumpers
 
 By default the board is powered by SCSI termination power (`TERMPWR`), and is controlled by the joint JP1 (which is near J9).
 
@@ -186,7 +118,7 @@ If you want to power the Blue Pill module from USB power, you must:
 * Break joint **JP1** with a small knife
 * Ensure that **J9** AND **J10** are **NOT** shorted
 
-## Activity LED (D1) (v1.1+ only)
+## Activity LED (D1)
 
 ![Picture of Disk Activity LED (D1)](images/activity_led.jpg)
 
@@ -196,31 +128,7 @@ The signal is active-low, and current-limiting resistor for the LED is on the *p
 
 # Bill of Materials
 
-To assemble the board, you will need the following components.
-
-## Required
-
-Quantity | Thing | Example Part Number
----------|-------|--------------------
-1        | An STM32 "Blue Pill" module and a way to program it with the [BlueSCSI](https://github.com/erichelgeson/BlueSCSI) firmware |
-2        | 330 Ohm Resistor Network in SIP-10 package | Bourns 4610X-101-331
-2        | 220 Ohm Resistor Network in SIP-10 package | Bourns 4610X-101-221
-1        | MicroSD Card connector (or use SD-to-MicroSD adapter [as shown here](#microsd-card-j3-and-sd-card-breakout-j7)) |  Molex 104031-0811
-1        | 2x20 right-angle **2mm** header for connector J1 |
-2        | 1x2 header pins for the termination jumper connectors J4 and J5 |
-2        | Jumpers (aka jumper caps, shunts, or shorts) for J4 and J5 |
-
-## Optional
-
-Quantity | Thing
----------|-------
-1        | 1x4 2.54mm right-angle header for debugging connector
-2        | 1x2 header pins for the power selection jumper connectors J9 and J10
-1        | 2x25 2.54 header pins for 50-pin desktop SCSI connector J8
-1        | LED for D1
-1        | Resistor (R1) for LED, any value from 330 ohms to about 1.8k ohms will work
-2        | ["low-profile" female headers](https://www.adafruit.com/product/3008) if you do not want to permanently solder the Blue Pill board
-
+See [BOM.md](BOM.md).
 # Caveats
 
 ## Termination
